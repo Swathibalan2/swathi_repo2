@@ -17,32 +17,35 @@
     position: absolute;
     top: 200px;
     right: 120px;
+    z-index: 1; /* behind other elements */
 }
 
 .my-photo-wrapper img {
     width: 250px;
     height: 250px;
-    border-radius: 50%;
+    border-radius: 50%;       /* circle on desktop */
     object-fit: cover;
     box-shadow: 0px 4px 10px rgb(128, 0, 128);
 }
 
-/* Responsive only for this photo */
+/* Responsive for mobile */
 @media (max-width: 768px) {
     .my-photo-wrapper {
-        position: static;        /* remove absolute */
-        display: flex;
-        justify-content: center; /* center image */
-        margin-top: 20px;
+        position: absolute;      /* keep it absolute */
+        top: 50px;               /* adjust vertical position */
+        right: 50%;              /* center horizontally */
+        transform: translateX(50%); /* adjust center */
+        z-index: 0;              /* behind content */
     }
 
     .my-photo-wrapper img {
-        width: 180px;
-        height: 180px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;      /* keep circle */
+        box-shadow: 0px 4px 10px rgba(128,0,128,0.5);
     }
 }
 
-	
 
 /* Global Variables */
 :root{
