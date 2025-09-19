@@ -1,17 +1,20 @@
-# Use an official OpenJDK runtime as base image
+# Use OpenJDK as base
 FROM openjdk:17-jdk-slim
 
-# Set working directory inside container
+# Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper & project files
+# Copy project files
 COPY . .
 
-# Build the app (skip tests to speed up)
+# Make mvnw executable
+RUN chmod +x ./mvnw
+
+# Build the app
 RUN ./mvnw clean package -DskipTests
 
 # Expose the port Render assigns
 EXPOSE 8080
 
-# Run the Spring Boot JAR (replace with actual jar name if needed)
+# Run the Spring Boot JAR (replace with actual jar name)
 CMD ["java", "-jar", "target/your-app-0.0.1-SNAPSHOT.jar"]
