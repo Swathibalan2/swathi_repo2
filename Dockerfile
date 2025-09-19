@@ -4,17 +4,17 @@ FROM openjdk:17-jdk-slim
 # Set working directory
 WORKDIR /app
 
-# Copy project files
+# Copy all project files into container
 COPY . .
 
 # Make mvnw executable
 RUN chmod +x ./mvnw
 
-# Build the app
+# Build the Spring Boot app (skip tests)
 RUN ./mvnw clean package -DskipTests
 
 # Expose the port Render assigns
 EXPOSE 8080
 
-# Run the Spring Boot JAR (replace with actual jar name)
-CMD ["java", "-jar", "target/your-app-0.0.1-SNAPSHOT.jar"]
+# Run the Spring Boot JAR (use wildcard to match actual JAR)
+CMD ["sh", "-c", "java -jar target/*.jar"]
